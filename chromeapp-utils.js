@@ -21,12 +21,12 @@ export class Storage {
         }
     }
     set (key, value) {
-        if (chrome.storage.sync) {
+        try {
             let obj = {}
             obj[key] = value
             chrome.storage.sync.set(obj)
-        } else {
-            throw new Error('No Chrome Storage detected')
+        } catch (err) {
+            throw new Error('Problem on set key/value at ChromeApp Storage')
         }
     }
 }
